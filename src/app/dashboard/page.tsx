@@ -266,12 +266,12 @@ export default function DashboardPage() {
                             <Chip
                               size="small"
                               label={task.status.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
-                              color={getStatusColor(task.status) as any}
+                              color={getStatusColor(task.status) as 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning'}
                             />
                             <Chip
                               size="small"
                               label={task.priority.replace(/\b\w/g, l => l.toUpperCase())}
-                              color={getPriorityColor(task.priority) as any}
+                              color={getPriorityColor(task.priority) as 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning'}
                             />
                           </Stack>
                         </Box>

@@ -95,11 +95,11 @@ api.interceptors.request.use(
 
 let isRefreshing = false;
 let failedQueue: Array<{
-  resolve: (value: any) => void;
-  reject: (error: any) => void;
+  resolve: (value: string | null) => void;
+  reject: (error: Error) => void;
 }> = [];
 
-const processQueue = (error: any, token: string | null = null) => {
+const processQueue = (error: Error | null, token: string | null = null) => {
   failedQueue.forEach(({ resolve, reject }) => {
     if (error) {
       reject(error);
@@ -116,7 +116,7 @@ api.interceptors.response.use(
     return response;
   },
   async (error: AxiosError) => {
-    const originalRequest = error.config as any;
+    const originalRequest = error.config as AxiosError['config'] & { _retry?: boolean };
 
     // Handle 401 errors (token expired)
     if (error.response?.status === 401 && !originalRequest._retry) {
@@ -174,7 +174,7 @@ api.interceptors.response.use(
       } catch (refreshError) {
         // Refresh failed, clear tokens and redirect to login
         tokenManager.clearAll();
-        processQueue(refreshError, null);
+        processQueue(refreshError as Error, null);
         
         if (typeof window !== 'undefined') {
           toast.error('Session expired. Please login again.');
@@ -233,14 +233,17 @@ export const endpoints = {
 
 export const handleApiError = (error: AxiosError): string => {
   if (error.response?.data) {
-    const data = error.response.data as any;
+    const data = error.response.data as {
+      detail?: string | Array<{ msg: string }>;
+      message?: string;
+    };
     
     if (typeof data.detail === 'string') {
       return data.detail;
     }
     
     if (Array.isArray(data.detail)) {
-      return data.detail.map((err: any) => err.msg).join(', ');
+      return data.detail.map((err: { msg: string }) => err.msg).join(', ');
     }
     
     if (data.message) {
@@ -251,8 +254,8 @@ export const handleApiError = (error: AxiosError): string => {
   return error.message || 'An unexpected error occurred';
 };
 
-export const isApiError = (error: any): error is AxiosError => {
-  return error.isAxiosError === true;
+export const isApiError = (error: unknown): error is AxiosError => {
+  return (error as AxiosError).isAxiosError === true;
 };
 
 export default api; 

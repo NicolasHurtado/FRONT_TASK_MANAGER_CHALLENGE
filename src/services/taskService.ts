@@ -1,7 +1,7 @@
 // Task Manager Frontend - Task Service
 
 import api, { endpoints, handleApiError, API_BASE_URL } from '@/lib/api';
-import { Task, TaskCreate, TaskUpdate, TaskStats, TaskFilters, CreateTaskData, UpdateTaskData } from '@/types';
+import { Task, TaskStats, TaskFilters, CreateTaskData, UpdateTaskData } from '@/types';
 import { AxiosError } from 'axios';
 
 // ============================================================================

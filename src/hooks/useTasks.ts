@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 
 import taskService from '@/services/taskService';
 import { queryKeys } from '@/lib/queryClient';
-import { TaskFilters, TaskFormData, TaskCreate, TaskUpdate, TaskStatus, UpdateTaskData, CreateTaskData, Task } from '@/types';
+import { TaskFilters, TaskStatus, UpdateTaskData, CreateTaskData, Task } from '@/types';
 
 // ============================================================================
 // TASK HOOKS

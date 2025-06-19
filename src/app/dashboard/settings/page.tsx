@@ -112,7 +112,7 @@ export default function SettingsPage() {
   const {
     register: registerPassword,
     handleSubmit: handleSubmitPassword,
-    formState: { errors: passwordErrors, isSubmitting: isPasswordSubmitting },
+    formState: { errors: passwordErrors },
     reset: resetPassword,
   } = useForm<PasswordFormData>({
     resolver: zodResolver(passwordSchema),
@@ -488,7 +488,7 @@ export default function SettingsPage() {
             Esta acción no se puede deshacer. Todas tus tareas y datos serán eliminados permanentemente.
           </Alert>
           <Typography variant="body1" sx={{ mb: 2 }}>
-            ¿Estás seguro de querer eliminar tu cuenta? Escribe <strong>"DELETE"</strong> para confirmar:
+            ¿Estás seguro de querer eliminar tu cuenta? Escribe <strong>&quot;DELETE&quot;</strong> para confirmar:
           </Typography>
           <TextField
             fullWidth
@@ -496,7 +496,7 @@ export default function SettingsPage() {
             value={deleteConfirmation}
             onChange={(e) => setDeleteConfirmation(e.target.value)}
             error={deleteConfirmation !== '' && deleteConfirmation !== 'DELETE'}
-            helperText={deleteConfirmation !== '' && deleteConfirmation !== 'DELETE' ? 'Por favor, escribe "DELETE" exactamente' : ''}
+            helperText={deleteConfirmation !== '' && deleteConfirmation !== 'DELETE' ? 'Por favor, escribe &quot;DELETE&quot; exactamente' : ''}
           />
         </DialogContent>
         <DialogActions>

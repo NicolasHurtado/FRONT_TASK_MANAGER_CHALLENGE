@@ -166,7 +166,7 @@ export default function LoginPage() {
               {/* Footer Links */}
               <Stack spacing={2} textAlign="center">
                 <Typography variant="body2" color="text.secondary">
-                  Don't have an account?{' '}
+                  Don&apos;t have an account?{' '}
                   <Link component={NextLink} href="/auth/register" color="primary">
                     Sign up here
                   </Link>

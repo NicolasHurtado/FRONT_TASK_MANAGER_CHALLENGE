@@ -2,6 +2,7 @@
 
 import { QueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import { TaskFilters } from '@/types';
 
 // ============================================================================
 // QUERY CLIENT CONFIGURATION
@@ -27,7 +28,7 @@ export const queryClient = new QueryClient({
       // Retry failed mutations once
       retry: 1,
       // Show error toast on mutation error
-      onError: (error: any) => {
+      onError: (error: Error) => {
         const message = error?.message || 'An unexpected error occurred';
         toast.error(message);
       },
@@ -47,7 +48,7 @@ export const queryKeys = {
   // Task queries
   tasks: {
     all: ['tasks'] as const,
-    list: (filters?: any) => ['tasks', 'list', filters] as const,
+    list: (filters?: TaskFilters) => ['tasks', 'list', filters] as const,
     detail: (id: string) => ['tasks', 'detail', id] as const,
     stats: ['tasks', 'stats'] as const,
   },

@@ -7,7 +7,7 @@ import React from 'react';
 
 import authService from '@/services/authService';
 import { queryKeys } from '@/lib/queryClient';
-import { LoginFormData, RegisterFormData, UserLogin, UserCreate, User } from '@/types';
+import { LoginFormData } from '@/types';
 
 // ============================================================================
 // QUERY KEYS
@@ -31,7 +31,7 @@ export const useCurrentUser = () => {
     staleTime: 5 * 60 * 1000, // 5 minutes
     retry: (failureCount, error) => {
       // Don't retry on 401 errors (unauthorized)
-      if ((error as any)?.response?.status === 401) {
+      if ((error as Error & { response?: { status?: number } })?.response?.status === 401) {
         return false;
       }
       return failureCount < 3;

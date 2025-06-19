@@ -30,7 +30,6 @@ import {
 } from 'recharts';
 
 import { useTaskStats, useTasks } from '@/hooks/useTasks';
-import { Task, TaskStatus, TaskPriority } from '@/types';
 
 // ============================================================================
 // CONSTANTS
