@@ -42,9 +42,9 @@ export default function DashboardPage() {
 
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return 'Good morning';
-    if (hour < 18) return 'Good afternoon';
-    return 'Good evening';
+    if (hour < 12) return 'Buenos días';
+    if (hour < 18) return 'Buenas tardes';
+    return 'Buenas noches';
   };
 
   const getPriorityColor = (priority: string) => {
@@ -84,7 +84,7 @@ export default function DashboardPage() {
                 {getGreeting()}, {user?.full_name?.split(' ')[0] || 'User'}! 👋
               </Typography>
               <Typography variant="body1" sx={{ opacity: 0.9 }}>
-                Ready to tackle your tasks today?
+                Listo para afrontar tus tareas hoy?
               </Typography>
             </Stack>
             <IconButton
@@ -122,7 +122,7 @@ export default function DashboardPage() {
                         {stats?.total || 0}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        Total Tasks
+                        Total Tareas
                       </Typography>
                     </Box>
                   </Stack>
@@ -149,7 +149,7 @@ export default function DashboardPage() {
                         {stats?.completed || 0}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        Completed
+                        Completadas
                       </Typography>
                     </Box>
                   </Stack>
@@ -176,7 +176,7 @@ export default function DashboardPage() {
                         {stats?.in_progress || 0}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        In Progress
+                        En Progreso
                       </Typography>
                     </Box>
                   </Stack>
@@ -203,7 +203,7 @@ export default function DashboardPage() {
                         {stats?.by_priority?.alta || 0}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        High Priority
+                        Alta Prioridad
                       </Typography>
                     </Box>
                   </Stack>
@@ -217,7 +217,7 @@ export default function DashboardPage() {
             <Card>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
-                  Progress Overview
+                  Resumen de Progreso
                 </Typography>
                 <Box sx={{ mb: 2 }}>
                   <LinearProgress
@@ -227,7 +227,7 @@ export default function DashboardPage() {
                   />
                 </Box>
                 <Typography variant="body2" color="text.secondary">
-                  {stats.completed} of {stats.total} tasks completed ({stats.completion_rate.toFixed(1)}%)
+                  {stats.completed} de {stats.total} tareas completadas ({stats.completion_rate.toFixed(1)}%)
                 </Typography>
               </CardContent>
             </Card>
@@ -237,7 +237,7 @@ export default function DashboardPage() {
           <Card>
             <CardContent>
               <Typography variant="h6" gutterBottom>
-                Recent Tasks
+                Tareas Recientes
               </Typography>
               {tasksLoading ? (
                 <LinearProgress />
@@ -265,12 +265,12 @@ export default function DashboardPage() {
                           <Stack direction="row" spacing={1}>
                             <Chip
                               size="small"
-                              label={task.status.replace('_', ' ')}
+                              label={task.status.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                               color={getStatusColor(task.status) as any}
                             />
                             <Chip
                               size="small"
-                              label={task.priority}
+                              label={task.priority.replace(/\b\w/g, l => l.toUpperCase())}
                               color={getPriorityColor(task.priority) as any}
                             />
                           </Stack>
@@ -282,7 +282,7 @@ export default function DashboardPage() {
               ) : (
                 <Box textAlign="center" py={4}>
                   <Typography variant="body1" color="text.secondary">
-                    No tasks yet. Create your first task to get started!
+                    No hay tareas todavía. Crea tu primera tarea para empezar!
                   </Typography>
                 </Box>
               )}

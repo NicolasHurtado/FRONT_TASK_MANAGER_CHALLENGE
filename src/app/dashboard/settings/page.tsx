@@ -186,10 +186,10 @@ export default function SettingsPage() {
         {/* Header */}
         <Box>
           <Typography variant="h4" fontWeight={600} gutterBottom>
-            Settings
+            Configuración
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            Manage your account settings and preferences
+            Gestiona tus configuraciones y preferencias
           </Typography>
         </Box>
 
@@ -198,8 +198,8 @@ export default function SettingsPage() {
           <CardContent>
             <Stack spacing={3}>
               <Box display="flex" alignItems="center" justifyContent="space-between">
-                <Typography variant="h6">Profile Information</Typography>
-                <Chip label="Active Account" color="success" size="small" />
+                <Typography variant="h6">Información de Perfil</Typography>
+                <Chip label="Cuenta Activa" color="success" size="small" />
               </Box>
 
               {/* Avatar Section */}
@@ -220,7 +220,7 @@ export default function SettingsPage() {
                     variant="outlined"
                     disabled
                   >
-                    Change Photo (Coming Soon)
+                    Cambiar Foto (Próximamente)
                   </Button>
                 </Box>
               </Box>
@@ -232,7 +232,7 @@ export default function SettingsPage() {
                 <Stack spacing={3}>
                   <TextField
                     {...registerProfile('full_name')}
-                    label="Full Name"
+                    label="Nombre Completo"
                     fullWidth
                     error={!!profileErrors.full_name}
                     helperText={profileErrors.full_name?.message}
@@ -240,7 +240,7 @@ export default function SettingsPage() {
 
                   <TextField
                     {...registerProfile('email')}
-                    label="Email Address"
+                    label="Dirección de Email"
                     type="email"
                     fullWidth
                     error={!!profileErrors.email}
@@ -254,14 +254,14 @@ export default function SettingsPage() {
                       startIcon={<SaveIcon />}
                       disabled={!isProfileDirty || updateProfileMutation.isPending}
                     >
-                      {updateProfileMutation.isPending ? 'Saving...' : 'Save Changes'}
+                      {updateProfileMutation.isPending ? 'Guardando...' : 'Guardar Cambios'}
                     </Button>
                     <Button
                       variant="outlined"
                       onClick={() => resetProfile()}
                       disabled={!isProfileDirty}
                     >
-                      Cancel
+                      Cancelar
                     </Button>
                   </Box>
                 </Stack>
@@ -274,20 +274,24 @@ export default function SettingsPage() {
         <Card>
           <CardContent>
             <Stack spacing={3}>
-              <Typography variant="h6">Security & Privacy</Typography>
+              <Typography variant="h6">Seguridad y Privacidad</Typography>
 
               <Box>
                 <Typography variant="subtitle2" gutterBottom>
-                  Password
+                  Contraseña
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                  Last changed: Never (or recent date)
+                  Última modificación: {new Date(user.updated_at).toLocaleDateString('es-ES', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
                 </Typography>
                 <Button
                   variant="outlined"
                   onClick={() => setIsPasswordDialogOpen(true)}
                 >
-                  Change Password
+                  Cambiar Contraseña
                 </Button>
               </Box>
 
@@ -295,10 +299,10 @@ export default function SettingsPage() {
 
               <Box>
                 <Typography variant="subtitle2" gutterBottom>
-                  Account Created
+                  Cuenta Creada
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {new Date(user.created_at).toLocaleDateString('en-US', {
+                  {new Date(user.created_at).toLocaleDateString('es-ES', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
@@ -313,7 +317,7 @@ export default function SettingsPage() {
         <Card>
           <CardContent>
             <Stack spacing={3}>
-              <Typography variant="h6">Notification Preferences</Typography>
+              <Typography variant="h6">Preferencias de Notificación</Typography>
 
               <Stack spacing={2}>
                 <FormControlLabel
@@ -323,7 +327,7 @@ export default function SettingsPage() {
                       onChange={() => handleNotificationChange('email')}
                     />
                   }
-                  label="Email Notifications"
+                  label="Notificaciones por Email"
                 />
                 <FormControlLabel
                   control={
@@ -332,7 +336,7 @@ export default function SettingsPage() {
                       onChange={() => handleNotificationChange('push')}
                     />
                   }
-                  label="Push Notifications"
+                  label="Notificaciones Push"
                 />
                 <FormControlLabel
                   control={
@@ -341,7 +345,7 @@ export default function SettingsPage() {
                       onChange={() => handleNotificationChange('taskReminders')}
                     />
                   }
-                  label="Task Reminders"
+                  label="Recordatorios de Tareas"
                 />
                 <FormControlLabel
                   control={
@@ -350,7 +354,7 @@ export default function SettingsPage() {
                       onChange={() => handleNotificationChange('weeklyReport')}
                     />
                   }
-                  label="Weekly Progress Report"
+                  label="Informe Semanal de Progreso"
                 />
               </Stack>
             </Stack>
@@ -362,11 +366,11 @@ export default function SettingsPage() {
           <CardContent>
             <Stack spacing={3}>
               <Typography variant="h6" color="error.main">
-                Danger Zone
+                Zona de Peligro
               </Typography>
 
               <Alert severity="warning">
-                These actions are irreversible. Please proceed with caution.
+                Estas acciones son irreversibles. Por favor, procede con precaución.
               </Alert>
 
               <Box display="flex" gap={2}>
@@ -377,7 +381,7 @@ export default function SettingsPage() {
                   onClick={handleLogout}
                   disabled={logoutMutation.isPending}
                 >
-                  {logoutMutation.isPending ? 'Logging out...' : 'Logout'}
+                  {logoutMutation.isPending ? 'Cerrando sesión...' : 'Cerrar sesión'}
                 </Button>
 
                 <Button
@@ -386,7 +390,7 @@ export default function SettingsPage() {
                   startIcon={<DeleteIcon />}
                   onClick={() => setIsDeleteDialogOpen(true)}
                 >
-                  Delete Account
+                  Eliminar Cuenta
                 </Button>
               </Box>
             </Stack>
@@ -401,13 +405,13 @@ export default function SettingsPage() {
         maxWidth="sm"
         fullWidth
       >
-        <DialogTitle>Change Password</DialogTitle>
+        <DialogTitle>Cambiar Contraseña</DialogTitle>
         <DialogContent>
           <Box component="form" sx={{ mt: 2 }}>
             <Stack spacing={3}>
               <TextField
                 {...registerPassword('currentPassword')}
-                label="Current Password"
+                label="Contraseña Actual"
                 type={showCurrentPassword ? 'text' : 'password'}
                 fullWidth
                 error={!!passwordErrors.currentPassword}
@@ -426,7 +430,7 @@ export default function SettingsPage() {
 
               <TextField
                 {...registerPassword('newPassword')}
-                label="New Password"
+                label="Nueva Contraseña"
                 type={showNewPassword ? 'text' : 'password'}
                 fullWidth
                 error={!!passwordErrors.newPassword}
@@ -445,7 +449,7 @@ export default function SettingsPage() {
 
               <TextField
                 {...registerPassword('confirmPassword')}
-                label="Confirm New Password"
+                label="Confirmar Nueva Contraseña"
                 type="password"
                 fullWidth
                 error={!!passwordErrors.confirmPassword}
@@ -456,14 +460,14 @@ export default function SettingsPage() {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setIsPasswordDialogOpen(false)}>
-            Cancel
+            Cancelar
           </Button>
           <Button
             onClick={handleSubmitPassword(onSubmitPassword)}
             variant="contained"
             disabled={changePasswordMutation.isPending}
           >
-            {changePasswordMutation.isPending ? <CircularProgress size={20} /> : 'Change Password'}
+            {changePasswordMutation.isPending ? <CircularProgress size={20} /> : 'Cambiar Contraseña'}
           </Button>
         </DialogActions>
       </Dialog>
@@ -478,21 +482,21 @@ export default function SettingsPage() {
         maxWidth="sm"
         fullWidth
       >
-        <DialogTitle color="error.main">Delete Account</DialogTitle>
+        <DialogTitle color="error.main">Eliminar Cuenta</DialogTitle>
         <DialogContent>
           <Alert severity="error" sx={{ mb: 2 }}>
-            This action cannot be undone. All your tasks and data will be permanently deleted.
+            Esta acción no se puede deshacer. Todas tus tareas y datos serán eliminados permanentemente.
           </Alert>
           <Typography variant="body1" sx={{ mb: 2 }}>
-            Are you sure you want to delete your account? Type <strong>"DELETE"</strong> to confirm:
+            ¿Estás seguro de querer eliminar tu cuenta? Escribe <strong>"DELETE"</strong> para confirmar:
           </Typography>
           <TextField
             fullWidth
-            placeholder="Type DELETE to confirm"
+            placeholder="Escribe DELETE para confirmar"
             value={deleteConfirmation}
             onChange={(e) => setDeleteConfirmation(e.target.value)}
             error={deleteConfirmation !== '' && deleteConfirmation !== 'DELETE'}
-            helperText={deleteConfirmation !== '' && deleteConfirmation !== 'DELETE' ? 'Please type "DELETE" exactly' : ''}
+            helperText={deleteConfirmation !== '' && deleteConfirmation !== 'DELETE' ? 'Por favor, escribe "DELETE" exactamente' : ''}
           />
         </DialogContent>
         <DialogActions>

@@ -3,6 +3,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import React from 'react';
 
 import authService from '@/services/authService';
 import { queryKeys } from '@/lib/queryClient';
@@ -108,10 +109,25 @@ export const useLogout = () => {
 };
 
 /**
- * Hook to check if user is authenticated
+ * Hook to check if user is authenticated (safe for SSR)
  */
 export const useIsAuthenticated = () => {
   return authService.isAuthenticated();
+};
+
+/**
+ * Hook to check if user is authenticated (client-side only, avoids hydration issues)
+ */
+export const useIsAuthenticatedClient = () => {
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+  const [isClient, setIsClient] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsClient(true);
+    setIsAuthenticated(authService.isAuthenticated());
+  }, []);
+
+  return { isAuthenticated: isClient ? isAuthenticated : false, isClient };
 };
 
 /**

@@ -223,7 +223,7 @@ export default function TasksPage() {
     return (
       <Container maxWidth="lg" sx={{ py: 4 }}>
         <Alert severity="error">
-          Failed to load tasks. Please try again.
+          Error al cargar las tareas. Por favor, inténtalo de nuevo.
         </Alert>
       </Container>
     );
@@ -235,10 +235,10 @@ export default function TasksPage() {
         {/* Header */}
         <Box>
           <Typography variant="h4" fontWeight={600} gutterBottom>
-            My Tasks
+            Mis Tareas
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            Manage and track your tasks efficiently
+            Gestiona y rastrea tus tareas de manera eficiente
           </Typography>
         </Box>
 
@@ -249,7 +249,7 @@ export default function TasksPage() {
               <Grid item xs={12} md={4}>
                 <TextField
                   fullWidth
-                  placeholder="Search tasks..."
+                  placeholder="Buscar tareas..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   InputProps={{
@@ -263,31 +263,31 @@ export default function TasksPage() {
               </Grid>
               <Grid item xs={12} sm={6} md={3}>
                 <FormControl fullWidth>
-                  <InputLabel>Status</InputLabel>
+                  <InputLabel>Estado</InputLabel>
                   <Select
                     value={statusFilter}
-                    label="Status"
+                    label="Estado"
                     onChange={(e) => setStatusFilter(e.target.value as TaskStatus | 'all')}
                   >
-                    <MenuItem value="all">All Status</MenuItem>
-                    <MenuItem value="por_hacer">To Do</MenuItem>
-                    <MenuItem value="en_progreso">In Progress</MenuItem>
-                    <MenuItem value="completada">Completed</MenuItem>
+                    <MenuItem value="all">Todos los Estados</MenuItem>
+                    <MenuItem value="por_hacer">Por Hacer</MenuItem>
+                    <MenuItem value="en_progreso">En Progreso</MenuItem>
+                    <MenuItem value="completada">Completada</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
               <Grid item xs={12} sm={6} md={3}>
                 <FormControl fullWidth>
-                  <InputLabel>Priority</InputLabel>
+                  <InputLabel>Prioridad</InputLabel>
                   <Select
                     value={priorityFilter}
-                    label="Priority"
+                    label="Prioridad"
                     onChange={(e) => setPriorityFilter(e.target.value as TaskPriority | 'all')}
                   >
-                    <MenuItem value="all">All Priorities</MenuItem>
-                    <MenuItem value="baja">Low</MenuItem>
-                    <MenuItem value="media">Medium</MenuItem>
-                    <MenuItem value="alta">High</MenuItem>
+                    <MenuItem value="all">Todas las Prioridades</MenuItem>
+                    <MenuItem value="baja">Baja</MenuItem>
+                    <MenuItem value="media">Media</MenuItem>
+                    <MenuItem value="alta">Alta</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -302,7 +302,7 @@ export default function TasksPage() {
                     setPriorityFilter('all');
                   }}
                 >
-                  Clear
+                  Limpiar
                 </Button>
               </Grid>
             </Grid>
@@ -340,19 +340,19 @@ export default function TasksPage() {
                       <Stack direction="row" spacing={1}>
                         <Chip
                           size="small"
-                          label={task.status.replace('_', ' ')}
+                          label={task.status.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                           color={getStatusColor(task.status) as any}
                         />
                         <Chip
                           size="small"
-                          label={task.priority}
+                          label={task.priority.replace(/\b\w/g, l => l.toUpperCase())}
                           color={getPriorityColor(task.priority) as any}
                         />
                       </Stack>
 
                       {task.created_at && (
                         <Typography variant="caption" color="text.secondary">
-                          Created: {new Date(task.created_at).toLocaleDateString()}
+                          Fecha de Creación: {new Date(task.created_at).toLocaleDateString()}
                         </Typography>
                       )}
                     </Stack>
@@ -365,7 +365,7 @@ export default function TasksPage() {
           <Card>
             <CardContent sx={{ textAlign: 'center', py: 8 }}>
               <Typography variant="h6" color="text.secondary" gutterBottom>
-                No tasks found
+                No se encontraron tareas
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
                 {searchTerm || statusFilter !== 'all' || priorityFilter !== 'all'

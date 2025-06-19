@@ -22,7 +22,7 @@ import {
 } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 
-import { useIsAuthenticated } from '@/hooks/useAuth';
+import { useIsAuthenticatedClient } from '@/hooks/useAuth';
 
 // ============================================================================
 // LANDING PAGE COMPONENT
@@ -30,7 +30,7 @@ import { useIsAuthenticated } from '@/hooks/useAuth';
 
 export default function LandingPage() {
   const router = useRouter();
-  const isAuthenticated = useIsAuthenticated();
+  const { isAuthenticated, isClient } = useIsAuthenticatedClient();
 
   const handleGetStarted = () => {
     if (isAuthenticated) {
@@ -123,7 +123,7 @@ export default function LandingPage() {
                       },
                     }}
                   >
-                    {isAuthenticated ? 'Go to Dashboard' : 'Get Started'}
+                    {isClient && isAuthenticated ? 'Go to Dashboard' : 'Get Started'}
                   </Button>
                   <Button
                     variant="outlined"
@@ -229,7 +229,7 @@ export default function LandingPage() {
                 fontWeight: 600,
               }}
             >
-              {isAuthenticated ? 'Open Dashboard' : 'Start Managing Tasks'}
+              {isClient && isAuthenticated ? 'Open Dashboard' : 'Start Managing Tasks'}
             </Button>
           </Stack>
         </Container>

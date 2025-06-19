@@ -60,9 +60,9 @@ export default function AnalyticsPage() {
   const statusData = React.useMemo(() => {
     if (!stats) return [];
     return [
-      { name: 'To Do', value: stats.todo, color: STATUS_COLORS.por_hacer },
-      { name: 'In Progress', value: stats.in_progress, color: STATUS_COLORS.en_progreso },
-      { name: 'Completed', value: stats.completed, color: STATUS_COLORS.completada },
+      { name: 'Por Hacer', value: stats.todo, color: STATUS_COLORS.por_hacer },
+      { name: 'En Progreso', value: stats.in_progress, color: STATUS_COLORS.en_progreso },
+      { name: 'Completada', value: stats.completed, color: STATUS_COLORS.completada },
     ];
   }, [stats]);
 
@@ -135,10 +135,10 @@ export default function AnalyticsPage() {
         {/* Header */}
         <Box>
           <Typography variant="h4" fontWeight={600} gutterBottom>
-            Analytics & Insights
+            Estadísticas y Análisis
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            Track your productivity and task completion patterns
+            Rastrea tu productividad y patrones de completación de tareas
           </Typography>
         </Box>
 
@@ -152,7 +152,7 @@ export default function AnalyticsPage() {
                     {productivityMetrics.completionRate.toFixed(1)}%
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Completion Rate
+                    Tasa de Completación
                   </Typography>
                 </CardContent>
               </Card>
@@ -164,7 +164,7 @@ export default function AnalyticsPage() {
                     {productivityMetrics.highPriorityRate.toFixed(1)}%
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    High Priority Rate
+                    Tasa de Prioridad Alta
                   </Typography>
                 </CardContent>
               </Card>
@@ -176,7 +176,7 @@ export default function AnalyticsPage() {
                     {productivityMetrics.totalTasks}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Total Tasks
+                    Total de Tareas
                   </Typography>
                 </CardContent>
               </Card>
@@ -188,7 +188,7 @@ export default function AnalyticsPage() {
                     {productivityMetrics.avgTasksPerDay.toFixed(1)}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Avg Tasks/Day
+                    Promedio de Tareas/Día
                   </Typography>
                 </CardContent>
               </Card>
@@ -203,7 +203,7 @@ export default function AnalyticsPage() {
             <Card>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
-                  Task Status Distribution
+                  Distribución de Estados de Tareas
                 </Typography>
                 <Box sx={{ height: 300 }}>
                   <ResponsiveContainer width="100%" height="100%">
@@ -233,7 +233,7 @@ export default function AnalyticsPage() {
             <Card>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
-                  Task Priority Distribution
+                  Distribución de Prioridades de Tareas
                 </Typography>
                 <Box sx={{ height: 300 }}>
                   <ResponsiveContainer width="100%" height="100%">
@@ -259,7 +259,7 @@ export default function AnalyticsPage() {
         <Card>
           <CardContent>
             <Typography variant="h6" gutterBottom>
-              Weekly Task Completion
+              Completación Semanal de Tareas
             </Typography>
             <Box sx={{ height: 300 }}>
               <ResponsiveContainer width="100%" height="100%">
@@ -274,7 +274,7 @@ export default function AnalyticsPage() {
                     dataKey="completed" 
                     stroke="#4caf50" 
                     strokeWidth={3}
-                    name="Tasks Completed"
+                    name="Tareas Completadas"
                   />
                 </LineChart>
               </ResponsiveContainer>
@@ -286,7 +286,7 @@ export default function AnalyticsPage() {
         <Card>
           <CardContent>
             <Typography variant="h6" gutterBottom>
-              Task Status Breakdown
+              Desglose de Estados de Tareas
             </Typography>
             <Grid container spacing={3}>
               {statusData.map((status) => (
@@ -320,33 +320,33 @@ export default function AnalyticsPage() {
         <Card>
           <CardContent>
             <Typography variant="h6" gutterBottom>
-              Productivity Insights
+              Productividad y Análisis
             </Typography>
             <Stack spacing={2}>
               {productivityMetrics && productivityMetrics.completionRate > 80 && (
                 <Chip
-                  label="🎉 Great job! You're completing most of your tasks"
+                  label="🎉 ¡Buen trabajo! Estás completando la mayoría de tus tareas"
                   color="success"
                   variant="outlined"
                 />
               )}
               {productivityMetrics && productivityMetrics.highPriorityRate < 50 && (
                 <Chip
-                  label="⚠️ Focus on completing high priority tasks first"
+                  label="⚠️ Focalízate en completar las tareas de alta prioridad primero"
                   color="warning"
                   variant="outlined"
                 />
               )}
               {stats && stats.in_progress > stats.completed && (
                 <Chip
-                  label="🔄 You have more tasks in progress than completed"
+                  label="🔄 Tienes más tareas en progreso que completadas"
                   color="info"
                   variant="outlined"
                 />
               )}
               {weeklyProgress.reduce((sum, day) => sum + day.completed, 0) === 0 && (
                 <Chip
-                  label="💪 No tasks completed this week - time to get productive!"
+                  label="💪 No se completaron tareas esta semana - ¡tiempo de ser productivo!"
                   color="error"
                   variant="outlined"
                 />

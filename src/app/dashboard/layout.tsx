@@ -41,22 +41,22 @@ const DRAWER_WIDTH = 240;
 
 const navigationItems = [
   {
-    text: 'Dashboard',
+    text: 'Panel',
     icon: <DashboardIcon />,
     href: '/dashboard',
   },
   {
-    text: 'Tasks',
+    text: 'Tareas',
     icon: <TasksIcon />,
     href: '/dashboard/tasks',
   },
   {
-    text: 'Analytics',
+    text: 'Estadísticas',
     icon: <AnalyticsIcon />,
     href: '/dashboard/analytics',
   },
   {
-    text: 'Settings',
+    text: 'Configuración',
     icon: <SettingsIcon />,
     href: '/dashboard/settings',
   },
@@ -110,7 +110,7 @@ export default function DashboardLayout({
     <Box>
       <Toolbar>
         <Typography variant="h6" noWrap component="div" fontWeight={600}>
-          Task Manager
+          Gestor de Tareas
         </Typography>
       </Toolbar>
       <Divider />
