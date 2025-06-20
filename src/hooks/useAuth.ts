@@ -48,12 +48,15 @@ export const useLogin = () => {
 
   return useMutation({
     mutationFn: (credentials: LoginFormData) => {
+      console.log('🔄 useLogin mutationFn called with:', credentials);
       return authService.login({
         username: credentials.email, // Backend expects 'username' field
         password: credentials.password,
       });
     },
+    retry: false, // Deshabilitar retry para login
     onSuccess: (data) => {
+      console.log('🎉 Login success in hook:', data);
       // Cache user data
       queryClient.setQueryData(authKeys.user, data.user);
       
@@ -61,7 +64,10 @@ export const useLogin = () => {
       router.push('/dashboard');
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Login failed');
+      console.log('❌ Login error in hook:', error);
+      console.log('❌ Error message:', error.message);
+      console.log('❌ Error stack:', error.stack);
+      // No mostrar toast aquí, dejamos que el componente maneje el error
     },
   });
 };

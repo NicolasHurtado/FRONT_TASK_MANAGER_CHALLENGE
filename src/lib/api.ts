@@ -125,7 +125,13 @@ api.interceptors.response.use(
   async (error: AxiosError) => {
     const originalRequest = error.config as AxiosError['config'] & { _retry?: boolean };
 
-    // Handle 401 errors (token expired)
+    // No manejar errores 401 en el endpoint de login
+    if (originalRequest?.url?.includes('/auth/login')) {
+      console.log('🔄 Login endpoint error, not handling 401:', error);
+      return Promise.reject(error);
+    }
+
+    // Handle 401 errors (token expired) para otros endpoints
     if (error.response?.status === 401 && !originalRequest._retry) {
       if (isRefreshing) {
         // If already refreshing, queue the request
@@ -239,6 +245,7 @@ export const endpoints = {
 // ============================================================================
 
 export const handleApiError = (error: AxiosError): string => {
+  console.log('🔄 Handle API error:', error);
   if (error.response?.data) {
     const data = error.response.data as {
       detail?: string | Array<{ msg: string }>;

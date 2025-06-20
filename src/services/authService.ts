@@ -15,6 +15,7 @@ export const authService = {
    */
   async login(credentials: UserLogin): Promise<LoginResponse> {
     try {
+      console.log('🔄 Login credentials:', credentials);
       // Backend expects form data for OAuth2PasswordRequestForm
       const formData = new FormData();
       formData.append('username', credentials.username);
@@ -25,8 +26,9 @@ export const authService = {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       });
-
+      console.log('🔄 Login response:', response);
       const data: LoginResponse = response.data;
+      console.log('🔄 Login response22222:', data);
 
       // Store tokens
       tokenManager.setToken(data.access_token);
@@ -34,6 +36,7 @@ export const authService = {
 
       return data;
     } catch (error) {
+      console.log('🔄 Login error:', error);
       throw new Error(handleApiError(error as AxiosError));
     }
   },

@@ -25,13 +25,9 @@ export const queryClient = new QueryClient({
       refetchOnReconnect: true,
     },
     mutations: {
-      // Retry failed mutations once
-      retry: 1,
-      // Show error toast on mutation error
-      onError: (error: Error) => {
-        const message = error?.message || 'An unexpected error occurred';
-        toast.error(message);
-      },
+      // No retry failed mutations by default (especially for auth operations)
+      retry: 0,
+      // No global error handling to avoid duplicate toasts
     },
   },
 });
