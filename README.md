@@ -1,26 +1,23 @@
 # Task Manager Frontend 🚀
 
-A modern **React** application built with **Next.js 15**, **TypeScript**, **Material-UI**, and **React Query** for efficient task management.
+A modern **React** application built with **Next.js 15**, **TypeScript**, **Material-UI**, and **React Query** for task management.
 
 ## ✨ Features
 
-- 🔐 **JWT Authentication** - Secure login/register with automatic token refresh
-- ✅ **Task Management** - Complete CRUD operations for tasks
-- 📊 **Real-time Dashboard** - Live task statistics and progress tracking
-- 📱 **Responsive Design** - Optimized for all devices
+- 🔐 **JWT Authentication** - Login/register with automatic token refresh
+- ✅ **Task Management** - Full CRUD operations for tasks
+- 📊 **Real-time Stats** - Live task statistics and progress tracking
+- 📱 **Responsive Design** - Works on all devices
 - 🎯 **TypeScript** - Full type safety throughout the application
-- 🚀 **SSR Ready** - Server-side rendering with Next.js App Router
 
 ## 🛠️ Tech Stack
 
 - **Next.js 15** - React framework with App Router
-- **React 19** - UI library with latest features
-- **TypeScript** - Static typing for better development experience
-- **Material-UI (MUI)** - Modern component library
-- **React Query** - Powerful server state management
-- **Axios** - HTTP client with interceptors
-- **React Hook Form** - Performant forms with validation
-- **Zod** - Schema validation
+- **React 19** - UI library
+- **TypeScript** - Static typing
+- **Material-UI** - Component library
+- **React Query** - Server state management
+- **Axios** - HTTP client
 
 ## 🚀 Getting Started
 
@@ -31,21 +28,19 @@ cd frontend
 # Install dependencies
 npm install
 
-# Set up environment variables
+# Create environment file
 cp .env.example .env.local
 
 # Start development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
 ## ⚙️ Environment Variables
 
-Create `.env.local` file:
+Create `.env.local`:
 
 ```env
-NEXT_PUBLIC_BACKEND_URL=https://your-backend-url.com
+NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
 ```
 
 ## 📁 Project Structure
@@ -78,65 +73,76 @@ frontend/
 └── package.json
 ```
 
+## 🎯 Key Features
+
+### Authentication System
+- Login/Register with validation
+- JWT tokens with automatic refresh
+- Protected routes
+- Persistent sessions
+
+### Task Management
+- Create, read, update, delete tasks
+- Status: pending, in progress, completed
+- Priority: low, medium, high
+- Due date tracking
+
 ## 🔧 Available Scripts
 
 ```bash
-npm run dev          # Start development server
+npm run dev          # Development server
 npm run build        # Build for production
-npm run start        # Start production server
-npm run lint         # Run ESLint
-npm run test         # Run unit tests
+npm run start        # Production server
+npm run lint         # Run linter
+npm run test         # Run tests
 npm run test:watch   # Run tests in watch mode
+npm run test:coverage # Run tests with coverage
 ```
 
 ## 🧪 Testing
 
-Comprehensive unit tests for core functionality:
+The project includes **comprehensive unit tests** for core services:
 
-- **AuthService Tests** - Authentication operations
-- **TaskService Tests** - Task CRUD operations
-- **Component Tests** - UI component testing
+- **AuthService Tests** (20 tests) - User CRUD operations
+- **TaskService Tests** (20 tests) - Task CRUD operations
+- **Direct mocks** - Fast tests without external dependencies
+- **Full coverage** - Success cases, errors, and edge cases
+
+### Running Tests
 
 ```bash
 # Run all tests
 npm test
 
-# Run tests with coverage
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage report
 npm run test:coverage
 ```
 
-## 🔒 Security Features
+### Test Structure
 
-- **JWT Authentication** with automatic refresh
-- **Protected Routes** with middleware
-- **Form Validation** with Zod schemas
-- **HTTPS Support** for production
-- **Secure Cookies** for token storage
-
-## 🚀 Deployment
-
-The application is optimized for deployment on:
-
-- **Vercel** (recommended)
-- **Netlify**
-- **AWS Amplify**
-- Any Node.js hosting platform
-
-```bash
-# Build for production
-npm run build
-
-# Start production server
-npm start
+```
+src/__tests__/
+├── services/
+│   ├── authService.test.ts    # User CRUD tests
+│   └── taskService.test.ts    # Task CRUD tests
+└── README.md                  # Test documentation
 ```
 
-## 📱 Browser Support
+## 🔒 Security
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+- Secure JWT authentication
+- Form validation
+- Error handling
+- Secure token cookies
+
+---
+## 📞 Contact
+
+For any inquiries about the project, contact us at [nicolashurtado0712@gmail.com](mailto:nicolashurtado0712@gmail.com).
 
 ---
 
-**Built with ❤️ using modern React ecosystem**
+**Developed with ❤️ by Nicolas Hurtado**

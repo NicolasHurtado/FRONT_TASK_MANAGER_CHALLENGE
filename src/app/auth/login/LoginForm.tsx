@@ -172,10 +172,6 @@ export default function LoginForm() {
                     size="large"
                     disabled={isSubmitting || loginMutation.isPending}
                     sx={{ mt: 2 }}
-                    onClick={(e) => {
-                      console.log('🔄 Button clicked');
-                      // No prevenir aquí, dejamos que el form maneje el submit
-                    }}
                   >
                     {isSubmitting || loginMutation.isPending ? (
                       <CircularProgress size={24} />
