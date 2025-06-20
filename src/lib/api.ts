@@ -3,6 +3,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import Cookies from 'js-cookie';
 import toast from 'react-hot-toast';
+import https from 'https';
 
 // ============================================================================
 // API CONFIGURATION
@@ -10,6 +11,9 @@ import toast from 'react-hot-toast';
 
 export const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhostXXX:8000';
 
+const httpsAgent = new https.Agent({
+  rejectUnauthorized: false,
+});
 
 // Create axios instance
 export const api = axios.create({
@@ -17,7 +21,7 @@ export const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 10000, // 10 seconds timeout
+  timeout: 10000, // 10 seconds timeout,
 });
 
 // ============================================================================

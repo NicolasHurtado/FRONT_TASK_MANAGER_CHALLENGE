@@ -3,6 +3,7 @@
 import api, { endpoints, handleApiError, tokenManager } from '@/lib/api';
 import { LoginResponse, UserCreate, UserLogin, RefreshTokenRequest, User } from '@/types';
 import { AxiosError } from 'axios';
+import https from 'https';
 
 // ============================================================================
 // AUTH SERVICE
@@ -42,7 +43,14 @@ export const authService = {
    */
   async register(userData: UserCreate): Promise<LoginResponse> {
     try {
-      const response = await api.post(endpoints.auth.register, userData);
+      const httpsAgent = new https.Agent({
+        rejectUnauthorized: false,
+      });
+      console.log('userData', userData);
+      const response = await api.post(endpoints.auth.register, userData, {
+        httpsAgent,
+      });
+      console.log('response', response);
       const data: LoginResponse = response.data;
 
       // Store tokens
@@ -51,6 +59,7 @@ export const authService = {
 
       return data;
     } catch (error) {
+      console.log('error', error);
       throw new Error(handleApiError(error as AxiosError));
     }
   },
